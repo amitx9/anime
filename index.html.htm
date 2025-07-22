@@ -1,0 +1,74 @@
+<!-- payment.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Options</title>
+    <style>
+        /* Similar styling as index.html */
+        .payment-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .payment-option {
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .payment-option:hover {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1>Payment Options</h1>
+        <div class="payment-option" onclick="processPayment('upi')">
+            <h2>UPI Payment</h2>
+            <p>Scan QR code or enter UPI ID</p>
+            <input type="text" id="upiId" placeholder="yourname@upi">
+            <button onclick="processPayment('upi')">Pay ₹299</button>
+        </div>
+        
+        <div class="payment-option" onclick="processPayment('bank')">
+            <h2>Bank Transfer</h2>
+            <p>Account Number: 1234567890</p>
+            <p>IFSC: ABCD1234567</p>
+            <p>Amount: ₹299</p>
+            <button onclick="processPayment('bank')">I've Made Payment</button>
+        </div>
+    </div>
+
+    <script>
+        function processPayment(method) {
+            if (method === 'upi') {
+                const upiId = document.getElementById('upiId').value;
+                if (!upiId) {
+                    alert('Please enter UPI ID');
+                    return;
+                }
+                // Simulate payment processing
+                setTimeout(() => {
+                    localStorage.setItem('isSubscriber', 'true');
+                    alert('Payment successful! You now have access to all videos.');
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                // For bank transfer, show confirmation
+                const transactionId = prompt('Enter transaction ID:');
+                if (transactionId) {
+                    // In real implementation, verify transaction ID
+                    localStorage.setItem('isSubscriber', 'true');
+                    alert('Transaction verified! You now have access to all videos.');
+                    window.location.href = 'index.html';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
